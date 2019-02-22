@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 4 Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+    <h1>Bootstrap Page</h1>
+
+    <p>Ejemplo llamada boton javascript</p> 
+    <button id="miBoton" type="button" class="btn btn-outline-primary btn-sm" onclick="miboton1()">
+            <span class="fa fa-copy" aria-hidden="true"></span>&nbsp;<small>Mi Botón 1</small>
+        </button>
+
+    <p>Ejemplo llamada boton jquery</p> 
+    <button id="miBoton2" type="button" class="btn btn-outline-primary btn-sm">
+        <span class="fa fa-copy" aria-hidden="true"></span>&nbsp;<small>Mi Botón 2</small>
+    </button>
+
+    </div>
+
+    <script>
+        function miboton1(){
+            //alert('mi botón uno');
+            console.info("mi botón uno");
+        }
+    
+        $(document).ready(function () {
+            $('#miBoton2').on('click', function () {
+                //alert("mi botón dos");
+                console.log("mi botón dos");
+            });    
+    
+            //dblClik en lista parcelas
+            /*
+            var table = $('#parcelas').DataTable();
+            $('#parcelas').on('dblclick', 'tr', function () {
+                var data = table.row(this).data();
+                $("#cuerpo_txtParcela").val(data[0]);
+                comprobarParcela();
+                $('#modal-buscar').modal('hide');
+            });
+            */
+        });
+    
+        function ejemplo_llamada_ajax() { 
+            v = $("#cuerpo_txtParcela").val();
+            $.ajax({
+                type: "POST",
+                url: "part.aspx/dameDatosParcela",
+                data: '{codParcela: "' + v + '" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: parcelaEncontrada,
+                failure: function (respuesta) {
+                    alert(respuesta.d);
+                }
+            });
+        };
+    </script>
+    
+</body>
+</html>
